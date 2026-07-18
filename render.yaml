@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: mason-ai
+    name: mason-chat
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt

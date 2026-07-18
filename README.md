@@ -1,4 +1,4 @@
-# mason-ai
+# mason-chat
 
 A small FastAPI backend that answers visitor questions about Mason Mullendore, using
 retrieval-augmented generation (RAG) over a bio/resume corpus. Deployed on Render;
@@ -23,7 +23,7 @@ flowchart TB
 
     subgraph Runtime["Live chat request"]
         widget["Chat widget\nmasonmullendore.com (Vercel)"]
-        api["FastAPI POST /chat\nmason-ai (Render)"]
+        api["FastAPI POST /chat\nmason-chat (Render)"]
         embed2["app/embeddings.py\nGemini embed_query()"]
         rag["app/rag.py\npgvector cosine search"]
         llm["app/llm.py\nGroq chat completion (llama-3.3-70b)\n→ streamed back to widget as SSE"]
@@ -80,7 +80,7 @@ RAG) rather than the size of today's content actually requiring it.
 
 1. Go to [neon.tech](https://neon.tech) and sign up (GitHub/Google/email) — the free tier
    requires no credit card.
-2. Click **Create a project**. Give it a name (e.g. `mason-ai`), pick a region close to
+2. Click **Create a project**. Give it a name (e.g. `mason-chat`), pick a region close to
    where Render will run your app (e.g. a US region if deploying Render's Oregon default),
    and leave the Postgres version at its default. Click **Create project**.
 3. Once created, Neon lands you on the project dashboard with a **Connect** panel already

@@ -12,7 +12,7 @@ good documentation, and tooling that catches mistakes before they ship (linting,
 accessibility checks, automated formatting).
 
 Outside of work, Mason enjoys hiking, fly fishing and tinkering with side projects — this chatbot,
-mason-ai, is one of them: a small FastAPI backend that answers questions about him using
+mason-chat, is one of them: a small FastAPI backend that answers questions about him using
 retrieval-augmented generation over his own bio and project history.
 
 He is known for exploring all of what the great state of Montana has to offer. He is married to wife of many years. Together they have a mini aussie who loves adventure.
