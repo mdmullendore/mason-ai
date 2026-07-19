@@ -12,7 +12,7 @@ the store scales past what fits comfortably in process memory.
 
 ```mermaid
 flowchart TB
-    subgraph Ingestion["Ingestion — run manually: python scripts/ingest.py"]
+    subgraph Ingestion["Ingestion — run manually: venv/bin/python scripts/ingest.py"]
         content["content/ (.md, .pdf, images)"]
         vision["app/vision.py\nGroq image captioning (qwen3.6-27b)"]
         embed1["app/embeddings.py\nGemini embed_documents()"]
@@ -109,6 +109,14 @@ python scripts/ingest.py       # embeds content/ and loads it into Postgres
 uvicorn app.main:app --reload  # serves on http://localhost:8000
 ```
 
+If you run these without activating the venv first (`source venv/bin/activate`), call the venv's
+python explicitly — otherwise the system Python is used and `from dotenv import load_dotenv` fails
+with `ModuleNotFoundError`:
+
+```bash
+venv/bin/python scripts/ingest.py
+```
+
 Test it:
 
 ```bash
@@ -121,8 +129,9 @@ curl -N -X POST localhost:8000/chat \
 
 1. Edit or add `.md`/`.pdf`/image files under `content/` — any number of documents,
    mixed formats are fine.
-2. Re-run `python scripts/ingest.py` — this truncates and reloads the `chunks` table and
-   rebuilds the HNSW index, so it's safe to re-run any time content changes.
+2. Re-run `python scripts/ingest.py` (or `venv/bin/python scripts/ingest.py` if the venv
+   isn't activated) — this truncates and reloads the `chunks` table and rebuilds the HNSW
+   index, so it's safe to re-run any time content changes.
 3. Redeploy the FastAPI app if needed (Render redeploys automatically on push, if
    connected to the repo) — note the *app* doesn't need redeploying just because content
    changed, only if code changed, since `ingest.py` writes straight to Neon.
