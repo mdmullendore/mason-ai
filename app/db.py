@@ -20,6 +20,7 @@ def get_pool() -> ConnectionPool:
             min_size=1,
             max_size=5,
             configure=_configure,
+            check=ConnectionPool.check_connection,
             open=True,
         )
     return _pool
